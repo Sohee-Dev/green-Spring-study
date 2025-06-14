@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+    <h1>Index Page</h1>
+    <hr>
+    <p th:if="${msg != null}" th:text="${msg}"></p>
+    <ul th:if ="${session.id == null}">
+        <li><a href="/registForm">회원가입</a></li>
+        <li><a href="/loginForm">로그인</a></li>
+        <li><a href="/boardList">게시글보기</a></li>
+    </ul>
+    <ul th:if ="${session.id != null}">
+        <li><a href="/logout">로그아웃</a></li>
+        <li><a href="/boardList">게시글보기</a></li>
+        <li><a href="/insertBoardForm">게시글쓰기</a></li>
+    </ul>
+</body>
+</html>

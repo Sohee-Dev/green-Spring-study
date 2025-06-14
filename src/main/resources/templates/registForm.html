@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>RegistForm</title>
+</head>
+<body>
+<h1>회원가입</h1>
+<hr>
+<form action="regist" method="post" th:object="${member}">
+  <table border="1">
+    <tbody>
+      <tr>
+        <th>ID</th>
+        <td><input type="text" name="ID" placeholder="아이디 입력" required th:field="*{id}"></td>
+        <td th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></td>
+      </tr>
+      <tr>
+        <th>PW</th>
+        <td><input type="password" name="password" placeholder="비밀번호 입력" required th:field="*{password}"></td>
+        <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></td>
+      </tr>
+      <tr>
+        <th>NAME</th>
+        <td><input type="text" name="name" placeholder="이름 입력" required></td>
+      </tr>
+      <tr>
+        <th>PHONE</th>
+        <td><input type="text" name="phone" placeholder="전화번호 입력" required th:field="*{phone}"></td>
+        <td th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></td>
+      </tr>
+      <tr>
+        <td colspan="2"><input type="submit" value="가입"></td>
+      </tr>
+    </tbody>
+  </table>
+</form>
+<hr>
+<a href="/">Index로 돌아가기</a>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BoardList</title>
+</head>
+<body>
+<h1>BoardList</h1>
+<hr>
+<p th:if="${msg != null}" th:text="${msg}"></p>
+<table border="1">
+  <thead>
+    <tr>
+      <th>NO.</th>
+      <th>제목</th>
+      <th>작성자</th>
+      <th>작성일</th>
+    </tr>
+    <tr th:each="board : ${list}">
+      <td th:text="${board.bno}"></td>
+      <td><a th:href="@{/boardInfo/{bno}(bno=${board.bno})}" th:text="${board.title}"></a></td>
+      <td th:text="${board.memberEntity.id}"></td>
+      <td th:text="${board.createdAt}"></td>
+    </tr>
+  </thead>
+</table>
+</body>
+</html>
