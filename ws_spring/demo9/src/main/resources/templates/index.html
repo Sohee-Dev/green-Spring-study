@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Index Page</title>
+</head>
+<body>
+<h1>Index Page</h1>
+<hr>
+<form action="/login" method="post" id="myForm">
+	ID <input type="text" name="username" placeholder="Input ID....." required><br>
+	PW <input type="password" name="password" placeholder="Input PW....." required><br><br>
+	<input type="submit" value="로그인">
+</form>
+<br>
+<button onclick="userInfo()">정보 확인</button>
+<p id="notice_p"></p>
+<script>
+	let token ='';
+	const notice_p = document.getElementById('notice_p');
+	document.getElementById('myForm').addEventListener('submit', function(e){
+		e.preventDefault();
+		
+		const form = e.target;
+		const formData = new FormData(form);
+		
+		const formObject = {};
+		formData.forEach((value, key) => {
+			formObject[key] = value;
+		});
+		console.log(formObject);
+		
+		fetch('/login', {
+			method: 'post',
+			headers:{
+				'Content-type': 'application/json'
+			},
+			body: JSON.stringify(formObject),
+		})
+		.then(async response => {
+			if(!response.ok){
+				const errorMessage = "아이디 및 비밀번호를 확인하세요";
+				throw new Error(errorMessage);
+			}else{
+				token = response.headers.get("userAuth");
+				localStorage.setItem('userAuth', token);
+			}
+			return response.text();
+		})
+		.then(data => {
+			notice_p.innerText="로그인 성공";
+		})
+		.catch(error => {
+			notice_p.innerText=error;
+		});
+	
+	})
+	
+	function userInfo(){
+		fetch('/user', {
+			method: 'get',
+			headers:{
+				'userAuth': localStorage.getItem('userAuth')
+			},
+		})
+		.then(async response => {
+			if(!response.ok){
+				const errorMessage = await response.text();
+				throw new Error(errorMessage);
+			}
+			return response.text();
+		})
+		.then(data =>{
+			console.log(data);
+			notice_p.innerText=data;
+		})
+		.catch(error => {
+			notice_p.innerText=error;
+		});
+		
+	}
+	
+
+	
+</script>
+
+</body>
+</html>

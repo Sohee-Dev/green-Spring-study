@@ -10,5 +10,6 @@ import lombok.ToString;
 public class LoginDTO {
 	private String username;
 	private String password;
-	
+	private String name;
+	private String role;
 }

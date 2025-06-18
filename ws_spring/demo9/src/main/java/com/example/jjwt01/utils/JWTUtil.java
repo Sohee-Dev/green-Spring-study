@@ -29,13 +29,41 @@ public class JWTUtil {
 		return username;
 	}
 	
-	//로그인 성공시 토큰 생성
-	public String createJwt(String username) {
+	//토큰에서 이메일 정보 추출
+	public String getUseremail(String token) {
+		String email = Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token)
+						  .getPayload().get("email", String.class);
+		return email;
+	}
+	
+	//토큰에서 이름 정보 추출
+	public String getName(String token) {
+		String name = Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token)
+						  .getPayload().get("name", String.class);
+		return name;
+	}
+	
+	//토큰에서 역할 정보 추출
+	public String getRole(String token) {
+		String role = Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token)
+						  .getPayload().get("role", String.class);
+		return role;
+	}
+	
+	//로그인 성공시 토큰 생성 : 시간 계산 - 1000 * 60 * 3L : 3분
+	public String createJwt(String username, String role, String name, Long expirationMs) {
 		String token = Jwts.builder()
 						   .claim("username", username)
+						   .claim("role", role)
+						   .claim("name", name)
 						   .issuedAt(new Date(System.currentTimeMillis()))
+						   .expiration(new Date(System.currentTimeMillis() + expirationMs)) //토큰 유효시간
 						   .signWith(secretKey)
 						   .compact();
 		return token;
+	}
+	
+	public SecretKey getSecretKey() {
+		return secretKey;
 	}
 }
