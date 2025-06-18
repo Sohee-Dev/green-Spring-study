@@ -44,6 +44,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   String result = "";
 
+  bool showImage = true;
+
   void _incrementCounter() {
     setState(() {
       _counter++;
@@ -56,6 +58,14 @@ class _MyHomePageState extends State<MyHomePage> {
     int com = random.nextInt(3) + 1;
 
     setState(() {
+      total++;
+      if(total == 0){
+        showImage = true;
+      }
+      else{
+        showImage = false;
+      }
+
       if (com == 1) {
         com_ListNum = 0;
       } else if (com == 2) {
@@ -78,7 +88,6 @@ class _MyHomePageState extends State<MyHomePage> {
         (user == 3 && com == 2)) {
       result = "승리!🎉";
       win++;
-      total++;
     } else if ((user == 1 && com == 2) ||
         (user == 2 && com == 3) ||
         (user == 3 && com == 1)) {
@@ -102,6 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
       lose = 0;
       win = 0;
       total = 0;
+      showImage = true;
     });
   }
 
@@ -140,7 +150,9 @@ class _MyHomePageState extends State<MyHomePage> {
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.black),
               ),
-              child: Text(rspList[com_ListNum], style: TextStyle(fontSize: 80)),
+              child: 
+                showImage ? Image.asset('hachiiware.png', width: 120, height: 120,) :
+                            Text(rspList[com_ListNum], style: TextStyle(fontSize: 80)),
             ),
             SizedBox(height: 50),
             Text(
@@ -155,10 +167,9 @@ class _MyHomePageState extends State<MyHomePage> {
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.black),
               ),
-              child: Text(
-                rspList[user_ListNum],
-                style: TextStyle(fontSize: 80),
-              ),
+              child: 
+              showImage ? Image.asset('chiikawa.png', width: 120, height: 120,) :
+                          Text(rspList[user_ListNum], style: TextStyle(fontSize: 80)),
             ),
             SizedBox(height: 10),
             Text(
