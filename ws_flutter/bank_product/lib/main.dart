@@ -1,4 +1,3 @@
-import 'package:bank_product/pages/productPage.dart';
 import 'package:bank_product/pages/sectionpage.dart';
 import 'package:flutter/material.dart';
 

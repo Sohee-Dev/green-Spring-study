@@ -1,3 +1,4 @@
+import 'package:bank_product/component/card_product_listview.dart';
 import 'package:flutter/material.dart';
 
 
@@ -8,7 +9,9 @@ class ReadCardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _bulidAppBar(context),
-      body: CardProduct(),
+      body:SingleChildScrollView( 
+        child:  CardProduct(),
+      ),
     );
   }
 }
@@ -40,7 +43,6 @@ class CardProduct extends StatelessWidget {
       children: [
         Container(
           alignment: Alignment.centerLeft,
-          height: 600,
           width: MediaQuery.of(context).size.width,
           color: Colors.white60,
           child: Padding(
@@ -82,8 +84,7 @@ class CardProduct extends StatelessWidget {
                 ),
                 SizedBox(height: 30),
                 Center(
-                  child: Image.network('https://www.busanbank.co.kr/upload/bhp//vupload/FIMA/product/card/image/%EB%94%A9%EB%94%A9%EC%8B%A0%EC%9A%A9%EB%8C%80.png',
-                    height: 200,),
+                  child: Image.asset('assets/images/card.png', height: 200,),
                 ),
 
                 SizedBox(height: 40),
@@ -103,42 +104,28 @@ class CardProduct extends StatelessWidget {
                 ),
                 SizedBox(height: 15,),
                 Divider(),
+                SizedBox(height: 15,),
                 Row(
-
+                  children: [
+                    Text('연회비\n\n',style: TextStyle(color: Colors.grey[600]),),
+                    SizedBox(width: 20,),
+                    Text('국내, 글로벌 7천원VISA 1만원\nJCB 1만원\nMASTER 1만원',style: TextStyle(
+                           fontWeight: FontWeight.bold,
+                    ))
+                  ],
                 ),
-                Text.rich(
-                  TextSpan(
-                    children: [
-                      TextSpan(
-                        text: '연회비  ',
-                        style: TextStyle(color: Colors.grey[600]),
-                      ),
-                      TextSpan(
-                        text: '국내, 글로벌 7천원VISA 1만원 / JCB 1만원 / MASTER 1만원',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 10,
-                        ),
-                      ),
-                      TextSpan(
-                        text: '\n기본금리 연  ',
-                        style: TextStyle(color: Colors.grey[600]),
-                      ),
-                      TextSpan(
-                        text: '1.9%',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.black,
-                        ),
-                      ),
-                      TextSpan(
-                        text: '  (12개월 세전)',
-                        style: TextStyle(color: Colors.grey[600], fontSize: 13),
-                      ),
-                    ],
-                  ),
+                SizedBox(height: 20,),
+                Row(
+                  children: [
+                    Text('후불교통',style: TextStyle(color: Colors.grey[600]),),
+                    SizedBox(width: 20,),
+                    Text('가능',style: TextStyle(
+                           fontWeight: FontWeight.bold,
+                    ))
+                  ],
                 ),
+                SizedBox(height: 60,),
+                CardList(),
               ],
             ),
           ),

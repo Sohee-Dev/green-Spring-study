@@ -2,7 +2,6 @@ import 'package:bank_product/component/card_product.dart';
 import 'package:bank_product/pages/productPage.dart';
 import 'package:flutter/material.dart';
 
-import '../component/main_product.dart';
 
 class Sectionpage extends StatelessWidget {
   const Sectionpage({super.key});
